@@ -13,7 +13,7 @@ api = Api(
     app,
     title='GymRats Image Server',
     version='1.0',
-    description=f"Repository: https://github.com/gymratones/gymrats-image-server\nStorageMode: \"{app.config['STORAGE_MODE']}\"",
+    description=f"<b>Repository:</b> https://github.com/gymratones/gymrats-image-server\n<b>StorageMode:</b> \"{app.config['STORAGE_MODE']}\"",
 )
 
 api.add_namespace(root_namespace, path='/v1')

@@ -3,7 +3,7 @@ from flask_restx import Api
 from flask_cors import CORS
 from config import Config
 
-from imageserver.routes import root_namespace, images_namespace
+from server.routes import root_namespace, images_namespace
 
 app = Flask(__name__)
 app.config.from_object(Config)

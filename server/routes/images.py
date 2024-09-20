@@ -3,8 +3,8 @@ from flask_restx import Resource, Namespace, reqparse, abort
 from PIL import Image
 from werkzeug.datastructures import FileStorage
 
-from imageserver.classes.LocalStorage import LocalStorage
-from imageserver.classes.B2Storage import B2Storage
+from server.classes.LocalStorage import LocalStorage
+from server.classes.B2Storage import B2Storage
 
 
 RESIZE_X = 150

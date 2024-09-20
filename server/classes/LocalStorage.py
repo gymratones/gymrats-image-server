@@ -3,7 +3,7 @@ from io import BytesIO
 import os
 
 
-UPLOADS_LOCAL_FOLDER = os.path.join(os.getcwd(), 'imageserver/uploads')
+UPLOADS_LOCAL_FOLDER = os.path.join(os.getcwd(), 'server/uploads')
 QUALITY = 100
 
 

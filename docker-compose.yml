@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  image-server:
+    container_name: image-server
+    ports:
+      - "5002:5000"
+    build: 
+      context: .
+      dockerfile: docker/flask/Dockerfile
+    volumes:
+      - ./:/python-docker
+    environment:
+      STORAGE_MODE: ${STORAGE_MODE}
+      B2_BUCKET_NAME: ${B2_BUCKET_NAME}
+      B2_KEY_ID: ${B2_KEY_ID}
+      B2_APPLICATION_KEY: ${B2_APPLICATION_KEY}
+    restart: unless-stopped

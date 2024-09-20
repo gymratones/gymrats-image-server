@@ -5,7 +5,7 @@ services:
   image-server:
     container_name: image-server
     ports:
-      - "5002:5000"
+      - "5003:5003"
     build: 
       context: .
       dockerfile: docker/flask/Dockerfile

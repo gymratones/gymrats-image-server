@@ -42,6 +42,4 @@ docker-compose up -d --build
 
 Go to next link and you must see the Swagger documention of the project:
 
-[localhost:5003](localhost:5003)
-
-
+[localhost:5003](http://127.0.0.1:5003)

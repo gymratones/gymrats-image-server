@@ -16,5 +16,5 @@ api = Api(
     description=f"Repository: https://github.com/gymratones/gymrats-image-server\nStorageMode: \"{app.config['STORAGE_MODE']}\"",
 )
 
-# api.add_namespace(root_namespace, path='/v1')
-# api.add_namespace(images_namespace, path='/v1/images')
+api.add_namespace(root_namespace, path='/v1')
+api.add_namespace(images_namespace, path='/v1/images')

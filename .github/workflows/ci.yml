@@ -27,7 +27,7 @@ jobs:
     - name: Install Railway
       run: npm i -g @railway/cli
     - name: Deploy to Railway
-      run: railway up --detach --dockerfile Dockerfile \
+      run: railway up --detach --dockerfile docker/flask/Dockerfile \
         --env B2_BUCKET_NAME="${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}" \
         --env B2_KEY_ID="${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}" \
         --env B2_APPLICATION_KEY="${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_ID }}"

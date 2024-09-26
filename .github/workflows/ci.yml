@@ -6,12 +6,6 @@ on:
       - staging
       - test-terraform-with-railway
 
-env:
-  TF_CLOUD_ORGANIZATION: "gymrats"
-  TF_API_TOKEN: "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
-  TF_WORKSPACE: "gymrats-image-server"
-  CONFIG_DIRECTORY: "./"
-
 jobs:
   init:
     runs-on: ubuntu-latest
@@ -20,25 +14,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Post init message
         run: echo "Pipeline initialized."
-  # deploy:
-  #   needs: init
-  #   runs-on: ubuntu-latest
-  #   environment: ${{ github.ref_name }}
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Use Python
-  #     uses: actions/setup-python@v2
-  #     with:
-  #       python-version: '3.11'
-  #   - name: Install dependencies
-  #     run: pip install -Ur requirements.txt
-  #   - name: Install Railway
-  #     run: npm i -g @railway/cli
-  #   - name: Deploy to Railway
-  #     run: railway up --service $RAILWAY_SERVICE_NAME
-  #     env:
-  #       RAILWAY_SERVICE_NAME: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_SERVICE_NAME }}
-  #       RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
   terraform-deploy:
     needs: init
     runs-on: ubuntu-latest

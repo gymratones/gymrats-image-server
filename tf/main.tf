@@ -9,16 +9,12 @@ terraform {
 
 provider "railway" {
   token = "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
+  # RAILWAY_TOKEN = <token_from_github>
 }
 
-# module "railway_deployment" {
-#   source = "./modules/railway"
-  
-#   bucket_name = var.BUCKET_NAME
-# }
-
 resource "railway_project" "gymrats_image_server_project" {
-  name = "gymrats"
+  name                = "gymrats"
+  default_environment = railway_project.gymrats_image_server_environment.name
 }
 
 resource "railway_environment" "gymrats_image_server_environment" {
@@ -29,7 +25,6 @@ resource "railway_environment" "gymrats_image_server_environment" {
 resource "railway_service" "gymrats_image_server_service" {
   name       = "gymrats.service.test"
   project_id = railway_project.gymrats_image_server_project.id
-  environment_id = railway_project.gymrats_image_server_environment.id
 }
 
 # resource "railway_variable" "bucket_name" {

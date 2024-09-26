@@ -51,10 +51,12 @@ jobs:
       run: terraform init
       working-directory: ./tf
     - name: Terraform Plan
-      run: terraform plan \
+      run: |
+        terraform plan \
         --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}"
       working-directory: ./tf
     - name: Terraform Apply
-      run: terraform apply -auto-approve \
+      run: |
+        terraform apply -auto-approve
         --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}"
       working-directory: ./tf

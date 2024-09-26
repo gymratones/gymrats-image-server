@@ -25,11 +25,6 @@ resource "railway_service" "gymrats_image_server_service" {
   name       = "${local.project_name}-service"
   project_id = railway_project.gymrats_image_server_project.id
 }
-resource "railway_service_domain" "gymrats_image_server_service_domain" {
-  subdomain      = local.project_name
-  environment_id = railway_project.gymrats_image_server_project.default_environment.id
-  service_id     = railway_service.gymrats_image_server_service.id
-}
 
 resource "railway_variable_collection" "gymrats_image_server_variable_collection" {
   environment_id = railway_project.gymrats_image_server_project.default_environment.id
@@ -59,6 +54,12 @@ resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" 
   repository     = var.github_repository
   branch         = var.branch_name
   check_suites   = false
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
+}
+
+resource "railway_service_domain" "gymrats_image_server_service_domain" {
+  subdomain      = local.project_name
   environment_id = railway_project.gymrats_image_server_project.default_environment.id
   service_id     = railway_service.gymrats_image_server_service.id
 }

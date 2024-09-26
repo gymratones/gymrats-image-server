@@ -1,4 +1,4 @@
-variable "BUCKET_NAME" {
-  type        = string
-  description = "Name of the bucket"
-}
+# variable "BUCKET_NAME" {
+#   type        = string
+#   description = "Name of the bucket"
+# }

@@ -6,7 +6,9 @@ terraform {
   }
 }
 
-provider "railway" {}
+provider "railway" {
+  token = "aaaa"
+}
 
 module "railway_deployment" {
   source = "./modules/railway"

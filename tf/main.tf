@@ -29,7 +29,7 @@ resource "railway_service" "gymrats_image_server_service" {
 # }
 
 resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" {
-  repository     = "gymratones/gymrats-image-server"
+  repository     = var.github_repository
   branch         = var.branch_name
   check_suites   = true
   environment_id = railway_project.gymrats_image_server_project.default_environment.id

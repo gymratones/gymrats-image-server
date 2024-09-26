@@ -29,11 +29,13 @@ jobs:
       run: |
         terraform plan \
           --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}" \
+          --var="github_repository=${{ github.repository }}" \
           --var="branch_name=${{ github.head_ref || github.ref_name }}"
       working-directory: ./tf
     - name: Terraform Apply
       run: |
         terraform apply -auto-approve \
           --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}" \
+          --var="github_repository=${{ github.repository }}" \
           --var="branch_name=${{ github.head_ref || github.ref_name }}"
       working-directory: ./tf

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - test-terraform-with-railway
 
 jobs:
   init:
@@ -13,22 +14,43 @@ jobs:
         uses: actions/checkout@v2
       - name: Post init message
         run: echo "Pipeline initialized."
-  deploy:
+  # deploy:
+  #   needs: init
+  #   runs-on: ubuntu-latest
+  #   environment: ${{ github.ref_name }}
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Use Python
+  #     uses: actions/setup-python@v2
+  #     with:
+  #       python-version: '3.11'
+  #   - name: Install dependencies
+  #     run: pip install -Ur requirements.txt
+  #   - name: Install Railway
+  #     run: npm i -g @railway/cli
+  #   - name: Deploy to Railway
+  #     run: railway up --service $RAILWAY_SERVICE_NAME
+  #     env:
+  #       RAILWAY_SERVICE_NAME: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_SERVICE_NAME }}
+  #       RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
+  terraform-deploy:
     needs: init
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'
-    - name: Install dependencies
-      run: pip install -Ur requirements.txt
-    - name: Install Railway
-      run: npm i -g @railway/cli
-    - name: Deploy to Railway
-      run: railway up --service $RAILWAY_SERVICE_NAME
-      env:
-        RAILWAY_SERVICE_NAME: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_SERVICE_NAME }}
-        RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Configure Railway CLI
+      run: |
+        npm i -g @railway/cli
+        railway login --token ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./terraform
+    - name: Terraform Plan
+      run: terraform plan
+      working-directory: ./terraform
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      working-directory: ./terraform

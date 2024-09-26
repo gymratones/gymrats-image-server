@@ -28,7 +28,8 @@ jobs:
     - name: Terraform Plan
       run: |
         terraform plan \
-          --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}"
+          --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}" \
+          --var="branch_name=${{ github.head_ref || github.ref_name }}"
       working-directory: ./tf
     - name: Terraform Apply
       run: |

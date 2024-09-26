@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - 7-split-workflow-by-dependencies
 
 jobs:
   init:
@@ -14,6 +15,7 @@ jobs:
       - name: Post init message
         run: echo "Pipeline initialized."
   deploy:
+    needs: init
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
     steps:

@@ -14,7 +14,7 @@ provider "railway" {
 
 resource "railway_project" "gymrats_image_server_project" {
   name                = "gymrats"
-  default_environment = railway_project.gymrats_image_server_environment.name
+  default_environment = "staging"
 }
 
 resource "railway_environment" "gymrats_image_server_environment" {

@@ -16,9 +16,9 @@ provider "railway" {
 #   bucket_name = var.BUCKET_NAME
 # }
 
-# resource "railway_project" "flask_api" {
-#   name = "gymrats-terraform-test-project"
-# }
+resource "railway_project" "flask_api" {
+  name = "gymrats-terraform-test-project"
+}
 
 # resource "railway_service" "flask_api" {
 #   project_id = railway_project.flask_api.id

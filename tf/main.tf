@@ -10,16 +10,26 @@ provider "railway" {
   token = var.railway_token
 }
 
+locals {
+  project = "img-staging-gymrats"
+}
+
 resource "railway_project" "gymrats_image_server_project" {
-  name                = "gymrats"
+  name                = "${local.project}-project"
   default_environment = {
     name = "staging"
   }
 }
 
 resource "railway_service" "gymrats_image_server_service" {
-  name       = "gymrats.service.test"
+  name       = "${local.project}-service"
   project_id = railway_project.gymrats_image_server_project.id
+}
+
+resource "railway_service_domain" "gymrats_image_server_service_domain" {
+  subdomain      = local.project
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
 }
 
 resource "railway_variable_collection" "gymrats_image_server_variable_collection" {

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - staging
-      - 7-split-workflow-by-dependencies
 
 jobs:
   init:

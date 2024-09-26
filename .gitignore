@@ -3,5 +3,6 @@ __pycache__
 uploads
 
 tf/.terraform/
+tf/*.terraform.*
 tf/*.tfstate
 tf/*.tfstate.*

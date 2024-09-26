@@ -1,4 +1,4 @@
-# variable "BUCKET_NAME" {
-#   type        = string
-#   description = "Name of the bucket"
-# }
+variable "railway_token" {
+  type        = string
+  description = "Railway API token"
+}

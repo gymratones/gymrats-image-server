@@ -7,8 +7,7 @@ terraform {
   }
 }
 provider "railway" {
-  token = "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
-  # RAILWAY_TOKEN = <token_from_github>
+  token = var.railway_token
 }
 
 resource "railway_project" "gymrats_image_server_project" {

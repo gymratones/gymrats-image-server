@@ -26,8 +26,8 @@ resource "railway_environment" "gymrats_image_server_environment" {
 }
 
 resource "railway_service" "gymrats_image_server_service" {
+  name       = "gymrats.service.test"
   project_id = railway_project.gymrats_image_server_project.id
-  name       = "gymrats-test"
 }
 
 # resource "railway_variable" "bucket_name" {

@@ -6,6 +6,12 @@ on:
       - staging
       - test-terraform-with-railway
 
+env:
+  TF_CLOUD_ORGANIZATION: "gymrats"
+  TF_API_TOKEN: "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
+  TF_WORKSPACE: "gymrats-image-server"
+  CONFIG_DIRECTORY: "./"
+
 jobs:
   init:
     runs-on: ubuntu-latest
@@ -47,10 +53,10 @@ jobs:
     #     railway login --token ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
     - name: Terraform Init
       run: terraform init
-      working-directory: ./terraform
+      working-directory: ./tf
     - name: Terraform Plan
       run: terraform plan
-      working-directory: ./terraform
+      working-directory: ./tf
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: ./terraform
+      working-directory: ./tf

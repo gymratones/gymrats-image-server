@@ -18,10 +18,10 @@ resource "railway_project" "gymrats_image_server_project" {
   }
 }
 
-resource "railway_environment" "gymrats_image_server_environment" {
-  name       = "staging"
-  project_id = railway_project.gymrats_image_server_project.id
-}
+# resource "railway_environment" "gymrats_image_server_environment" {
+#   name       = "staging"
+#   project_id = railway_project.gymrats_image_server_project.id
+# }
 
 resource "railway_service" "gymrats_image_server_service" {
   name       = "gymrats.service.test"

@@ -6,7 +6,6 @@ terraform {
     }
   }
 }
-
 provider "railway" {
   token = "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
   # RAILWAY_TOKEN = <token_from_github>
@@ -14,7 +13,9 @@ provider "railway" {
 
 resource "railway_project" "gymrats_image_server_project" {
   name                = "gymrats"
-  default_environment = "staging"
+  default_environment = {
+    name = "staging"
+  }
 }
 
 resource "railway_environment" "gymrats_image_server_environment" {

@@ -46,7 +46,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v3
     # - name: Configure Railway CLI
     #   run: |
     #     npm i -g @railway/cli

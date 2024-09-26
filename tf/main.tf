@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "railway" {
-  token = "aaaa"
+  token = "0a9b9e96-87d7-4fa9-87ff-d60f49242363"
 }
 
 module "railway_deployment" {

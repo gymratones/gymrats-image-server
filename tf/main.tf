@@ -11,23 +11,23 @@ provider "railway" {
 }
 
 locals {
-  project = "img-staging-gymrats"
+  project_name = "img-test-gymrats"
 }
 
 resource "railway_project" "gymrats_image_server_project" {
-  name                = "${local.project}-project"
+  name                = "${local.project_name}-project"
   default_environment = {
     name = "staging"
   }
 }
 
 resource "railway_service" "gymrats_image_server_service" {
-  name       = "${local.project}-service"
+  name       = "${local.project_name}-service"
   project_id = railway_project.gymrats_image_server_project.id
 }
 
 resource "railway_service_domain" "gymrats_image_server_service_domain" {
-  subdomain      = local.project
+  subdomain      = local.project_name
   environment_id = railway_project.gymrats_image_server_project.default_environment.id
   service_id     = railway_service.gymrats_image_server_service.id
 }

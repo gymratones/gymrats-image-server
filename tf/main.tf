@@ -53,7 +53,7 @@ resource "railway_variable" "b2_application_key" {
 resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" {
   repository     = var.github_repository
   branch         = var.branch_name
-  check_suites   = true
+  check_suites   = false
   environment_id = railway_project.gymrats_image_server_project.default_environment.id
   service_id     = railway_service.gymrats_image_server_service.id
 }

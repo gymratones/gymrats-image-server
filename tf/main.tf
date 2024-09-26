@@ -11,7 +11,7 @@ provider "railway" {
 }
 
 locals {
-  project_name = "img-test-gymrats"
+  project_name = "img-${var.branch_name}-gymrats"
 }
 
 resource "railway_project" "gymrats_image_server_project" {
@@ -24,6 +24,11 @@ resource "railway_project" "gymrats_image_server_project" {
 resource "railway_service" "gymrats_image_server_service" {
   name       = "${local.project_name}-service"
   project_id = railway_project.gymrats_image_server_project.id
+}
+resource "railway_service_domain" "gymrats_image_server_service_domain" {
+  subdomain      = local.project_name
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
 }
 
 resource "railway_variable_collection" "gymrats_image_server_variable_collection" {

@@ -30,7 +30,7 @@ jobs:
         terraform plan \
           --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}" \
           --var="github_repository=${{ github.repository }}" \
-          --var="branch_name=test-terraform-with-railway" \
+          --var="branch_name=${{ github.head_ref || github.ref_name }}" \
           --var="storage_mode=B2_STORAGE" \
           --var="b2_bucket_name=${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}" \
           --var="b2_key_id=${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}" \
@@ -41,13 +41,14 @@ jobs:
         terraform apply -auto-approve \
           --var="railway_token=${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_TOKEN_TEST }}" \
           --var="github_repository=${{ github.repository }}" \
-          --var="branch_name=test-terraform-with-railway" \
+          --var="branch_name=${{ github.head_ref || github.ref_name }}" \
           --var="storage_mode=B2_STORAGE" \
           --var="b2_bucket_name=${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}" \
           --var="b2_key_id=${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}" \
           --var="b2_application_key=${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
-    # - working-directory: ./tf
-    #   run: railway up --service $RAILWAY_SERVICE_NAME
-    #   env:
-    #     RAILWAY_SERVICE_NAME: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_SERVICE_NAME }}
-    #     RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}
+      working-directory: ./tf
+    - name: Deploy to Railway
+      run: railway up --service $RAILWAY_SERVICE_NAME
+      env:
+        RAILWAY_SERVICE_NAME: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_SERVICE_NAME }}
+        RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_IMG_RAILWAY_DEPLOY_TOKEN }}

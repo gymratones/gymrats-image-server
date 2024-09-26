@@ -28,9 +28,10 @@ resource "railway_service" "gymrats_image_server_service" {
 #   value      = var.bucket_name
 # }
 
-# resource "railway_deployment" "flask_api" {
-#   service_id = railway_service.flask_api.id
-#   triggers = {
-#     code = filesha256("${path.module}/../../../app.py")
-#   }
-# }
+resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" {
+  repository     = "gymratones/gymrats-image-server"
+  branch         = "staging"
+  check_suites   = true
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
+}

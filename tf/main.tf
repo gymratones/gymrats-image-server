@@ -34,29 +34,29 @@ resource "railway_service" "gymrats_image_server_service" {
   project_id = railway_project.gymrats_image_server_project.id
 }
 
-# resource "railway_variable_collection" "gymrats_image_server_variable_collection" {
-#   environment_id = railway_project.gymrats_image_server_project.default_environment.id
-#   service_id     = railway_service.gymrats_image_server_service.id
+resource "railway_variable_collection" "gymrats_image_server_variable_collection" {
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
 
-#   variables = [
-#     {
-#       name  = "STORAGE_MODE"
-#       value = var.storage_mode
-#     },
-#     {
-#       name  = "B2_BUCKET_NAME"
-#       value = var.b2_bucket_name
-#     },
-#     {
-#       name  = "B2_KEY_ID"
-#       value = var.b2_key_id
-#     },
-#     {
-#       name  = "B2_APPLICATION_KEY"
-#       value = var.b2_application_key
-#     }
-#   ]
-# }
+  variables = [
+    {
+      name  = "STORAGE_MODE"
+      value = var.storage_mode
+    },
+    {
+      name  = "B2_BUCKET_NAME"
+      value = var.b2_bucket_name
+    },
+    {
+      name  = "B2_KEY_ID"
+      value = var.b2_key_id
+    },
+    {
+      name  = "B2_APPLICATION_KEY"
+      value = var.b2_application_key
+    }
+  ]
+}
 
 resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" {
   repository     = var.github_repository

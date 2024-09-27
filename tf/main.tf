@@ -66,8 +66,8 @@ resource "railway_deployment_trigger" "gymrats_image_server_deployment_trigger" 
   service_id     = railway_service.gymrats_image_server_service.id
 }
 
-# resource "railway_service_domain" "gymrats_image_server_service_domain" {
-#   subdomain      = "${local.project_name}"
-#   environment_id = railway_project.gymrats_image_server_project.default_environment.id
-#   service_id     = railway_service.gymrats_image_server_service.id
-# }
+resource "railway_service_domain" "gymrats_image_server_service_domain" {
+  subdomain      = local.project_name
+  environment_id = railway_project.gymrats_image_server_project.default_environment.id
+  service_id     = railway_service.gymrats_image_server_service.id
+}

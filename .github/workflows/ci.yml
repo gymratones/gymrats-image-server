@@ -20,6 +20,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Set up Terraform credentials file
+      run: |
+        cat << EOF > $HOME/.terraformrc
+        credentials "app.terraform.io" {
+          token = "${{ secrets.GYMRATS_TERRAFORM_USER_TOKEN }}"
+        }
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
     - name: Terraform Init

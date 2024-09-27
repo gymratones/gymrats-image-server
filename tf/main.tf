@@ -1,4 +1,12 @@
 terraform {
+  cloud {
+    organization = "gymrats"
+    hostname = "app.terraform.io"
+    workspaces {
+      name = "gymrats-image-server"
+      project = "gymrats"
+    }
+  }
   required_providers {
     railway = {
       source = "terraform-community-providers/railway"

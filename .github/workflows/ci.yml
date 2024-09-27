@@ -47,7 +47,7 @@ jobs:
     - name: Deploy to Railway
       run: railway up --service "img-${{ github.head_ref || github.ref_name }}-gymrats-service"
       env:
-        RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_API_RAILWAY_DEPLOY_TOKEN }}
+        RAILWAY_TOKEN: ${{ secrets.GYMRATS_STAGING_RAILWAY_ACCOUNT_TOKEN }}
     # - name: Terraform Apply
     #   run: |
     #     terraform apply -auto-approve \

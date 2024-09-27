@@ -1,6 +1,6 @@
-variable "railway_token" {
+variable "provider_token" {
   type        = string
-  description = "Railway API token"
+  description = "Provider Token"
 }
 
 variable "github_repository" {

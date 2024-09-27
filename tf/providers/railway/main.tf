@@ -15,7 +15,7 @@ terraform {
   }
 }
 provider "railway" {
-  token = var.railway_token
+  token = var.provider_token
 }
 
 locals {

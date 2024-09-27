@@ -62,5 +62,5 @@ resource "railway_service_domain" "gymrats_image_server_service_domain" {
   subdomain      = "${local.project_name}"
   environment_id = railway_project.gymrats_image_server_project.default_environment.id
   service_id     = railway_service.gymrats_image_server_service.id
-  depends_on = [ railway_service.gymrats_image_server_service ]
+  depends_on = [ railway_service.gymrats_image_server_service_domain.id ]
 }

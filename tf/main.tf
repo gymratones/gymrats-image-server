@@ -30,7 +30,7 @@ resource "railway_project" "gymrats_image_server_project" {
 }
 
 resource "railway_service" "gymrats_image_server_service" {
-  name       = "${local.project_name}-service-new"
+  name       = "${local.project_name}-service"
   project_id = railway_project.gymrats_image_server_project.id
 }
 

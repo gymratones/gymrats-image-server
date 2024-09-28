@@ -20,10 +20,6 @@ provider "render" {
   owner_id = var.provider_account_id
 }
 
-locals {
-  project_name = "img-${var.branch_name}-gymrats"
-}
-
 resource "render_project" "gymrats_image_server_project" {
   name = "${local.project_name}-project"
   environments = {

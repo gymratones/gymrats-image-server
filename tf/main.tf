@@ -68,4 +68,8 @@ resource "render_web_service" "gymrats_image_server_service" {
       value = var.b2_application_key
     }
   }
+
+  custom_domains = [
+    { name : "${project_name}.onrender.com" }
+  ]
 }

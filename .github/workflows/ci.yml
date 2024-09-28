@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - dev-dd # DELETE AFTER DEVELOPMENT
 
 jobs:
   init:

@@ -18,3 +18,7 @@ api = Api(
 
 api.add_namespace(root_namespace, path='/v1')
 api.add_namespace(images_namespace, path='/v1/images')
+
+
+if __name__ == '__main__':
+      app.run(host='0.0.0.0', port=80)

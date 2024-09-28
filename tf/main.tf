@@ -1,22 +1,22 @@
 terraform {
   cloud {
     organization = "gymrats"
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
     workspaces {
-      name = "gymrats-image-server"
+      name    = "gymrats-image-server"
       project = "gymrats"
     }
   }
   required_providers {
     render = {
-      source = "render-oss/render"
+      source  = "render-oss/render"
       version = "1.1.0"
     }
   }
 }
 
 provider "render" {
-  api_key = var.provider_token
+  api_key  = var.provider_token
   owner_id = var.provider_account_id
 }
 
@@ -35,10 +35,10 @@ resource "render_project" "gymrats_image_server_project" {
 }
 
 resource "render_web_service" "gymrats_image_server_service" {
-  name               = "${local.project_name}-service"
-  plan               = "starter"
-  region             = "frankfurt"
-  start_command      = "gunicorn app:app"
+  name          = "${local.project_name}-service"
+  plan          = "starter"
+  region        = "frankfurt"
+  start_command = "gunicorn app:app"
 
   runtime_source = {
     native_runtime = {

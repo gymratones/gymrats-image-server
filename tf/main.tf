@@ -17,7 +17,7 @@ terraform {
 
 provider "render" {
   api_key = var.provider_token
-  owner_id = "usr-crrka6l6l47c73ckjvo0"
+  owner_id = var.provider_account_id
 }
 
 locals {
@@ -53,10 +53,6 @@ resource "render_web_service" "gymrats_image_server_service" {
       runtime  = "python"
     }
   }
-}
-
-resource "render_env_group" "gymrats_image_server_env_group" {
-  name = "${local.project_name}-env-group"
 
   env_vars = {
     STORAGE_MODE = {

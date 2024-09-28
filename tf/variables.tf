@@ -3,6 +3,11 @@ variable "provider_token" {
   description = "Provider Token"
 }
 
+variable "provider_account_id" {
+  type        = string
+  description = "Provider Account ID"
+}
+
 variable "github_repository" {
   type        = string
   description = "Full Github repository name"

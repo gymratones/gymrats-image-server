@@ -35,6 +35,7 @@ jobs:
       run: |
         terraform plan \
           --var="provider_token=${{ secrets.GYMRATS_STAGING_PROVIDER_TOKEN }}" \
+          --var="provider_account_id=${{ secrets.GYMRATS_STAGING_PROVIDER_ACCOUNT_ID }}" \
           --var="github_repository=${{ github.repository }}" \
           --var="branch_name=${{ github.head_ref || github.ref_name }}" \
           --var="storage_mode=B2_STORAGE" \
@@ -46,6 +47,7 @@ jobs:
       run: |
         terraform apply -auto-approve \
           --var="provider_token=${{ secrets.GYMRATS_STAGING_PROVIDER_TOKEN }}" \
+          --var="provider_account_id=${{ secrets.GYMRATS_STAGING_PROVIDER_ACCOUNT_ID }}" \
           --var="github_repository=${{ github.repository }}" \
           --var="branch_name=${{ github.head_ref || github.ref_name }}" \
           --var="storage_mode=B2_STORAGE" \

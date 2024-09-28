@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - staging
-      - test-tf # TO BE DELETED
 
 jobs:
   init:

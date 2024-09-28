@@ -35,7 +35,7 @@ resource "render_project" "gymrats_image_server_project" {
 }
 
 resource "render_web_service" "gymrats_image_server_service" {
-  name          = "${local.project_name}-service"
+  name          = "${local.project_name}"
   plan          = "starter"
   region        = "frankfurt"
   start_command = "gunicorn app:app"
@@ -68,8 +68,4 @@ resource "render_web_service" "gymrats_image_server_service" {
       value = var.b2_application_key
     }
   }
-
-  custom_domains = [
-    { name : "${local.project_name}.onrender.com" }
-  ]
 }

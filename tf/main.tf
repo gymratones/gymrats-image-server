@@ -70,6 +70,6 @@ resource "render_web_service" "gymrats_image_server_service" {
   }
 
   custom_domains = [
-    { name : "${project_name}.onrender.com" }
+    { name : "${local.project_name}.onrender.com" }
   ]
 }

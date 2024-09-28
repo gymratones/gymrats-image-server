@@ -3,8 +3,8 @@ terraform {
     organization = "gymrats"
     hostname     = "app.terraform.io"
     workspaces {
-      name    = "gymrats-image-server"
-      project = "gymrats"
+      tags    = ["flask"]
+      project = "gymrats-image-server"
     }
   }
   required_providers {

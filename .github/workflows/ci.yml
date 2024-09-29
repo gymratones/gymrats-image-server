@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - tf-test # TO BE DELETED
 
 jobs:
   init:
@@ -30,27 +31,24 @@ jobs:
     - name: Terraform Init
       run: terraform init
       working-directory: ./tf
+    - name: Select (or Create) Terraform Workspace
+      run: terraform workspace select -or-create=true ${{ github.head_ref || github.ref_name }}
+      working-directory: ./tf
+    - name: Create variables.auto.tfvars
+      run:  |
+        cat << EOF > ./tf/variables.auto.tfvars
+        provider_token = "${{ secrets.GYMRATS_STAGING_PROVIDER_TOKEN }}"
+        provider_account_id = "${{ secrets.GYMRATS_STAGING_PROVIDER_ACCOUNT_ID }}"
+        github_repository = "${{ github.repository }}"
+        branch_name = "${{ github.head_ref || github.ref_name }}"
+        storage_mode = "B2_STORAGE"
+        b2_bucket_name = "${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}"
+        b2_key_id = "${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}"
+        b2_application_key = "${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
+        EOF
     - name: Terraform Plan
-      run: |
-        terraform plan \
-          --var="provider_token=${{ secrets.GYMRATS_STAGING_PROVIDER_TOKEN }}" \
-          --var="provider_account_id=${{ secrets.GYMRATS_STAGING_PROVIDER_ACCOUNT_ID }}" \
-          --var="github_repository=${{ github.repository }}" \
-          --var="branch_name=${{ github.head_ref || github.ref_name }}" \
-          --var="storage_mode=B2_STORAGE" \
-          --var="b2_bucket_name=${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}" \
-          --var="b2_key_id=${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}" \
-          --var="b2_application_key=${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
+      run: terraform plan
       working-directory: ./tf
     - name: Terraform Apply
-      run: |
-        terraform apply -auto-approve \
-          --var="provider_token=${{ secrets.GYMRATS_STAGING_PROVIDER_TOKEN }}" \
-          --var="provider_account_id=${{ secrets.GYMRATS_STAGING_PROVIDER_ACCOUNT_ID }}" \
-          --var="github_repository=${{ github.repository }}" \
-          --var="branch_name=${{ github.head_ref || github.ref_name }}" \
-          --var="storage_mode=B2_STORAGE" \
-          --var="b2_bucket_name=${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}" \
-          --var="b2_key_id=${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}" \
-          --var="b2_application_key=${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
+      run: terraform apply -auto-approve
       working-directory: ./tf

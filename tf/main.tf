@@ -3,23 +3,6 @@ terraform {
     organization = "gymrats"
     hostname     = "app.terraform.io"
     workspaces {
-      name    = "prod"
-      project = "gymrats-image-server"
-    }
-  }
-  required_providers {
-    render = {
-      source  = "render-oss/render"
-      version = "1.1.0"
-    }
-  }
-}
-
-terraform {
-  cloud {
-    organization = "gymrats"
-    hostname     = "app.terraform.io"
-    workspaces {
       name    = "staging"
       project = "gymrats-image-server"
     }

@@ -29,7 +29,10 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
     - name: Terraform Init
-      run: yes "${{ github.head_ref || github.ref_name }}" | terraform init
+      run:  |
+        terraform init << EOF
+        ${{ github.head_ref || github.ref_name }}
+        EOF
       working-directory: ./tf
     - name: Terraform Plan
       run: |

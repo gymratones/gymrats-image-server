@@ -3,8 +3,8 @@ terraform {
     organization = "gymrats"
     hostname     = "app.terraform.io"
     workspaces {
-      name    = "gymrats-image-server"
-      project = "gymrats"
+      name    = "staging"
+      project = "gymrats-image-server"
     }
   }
   required_providers {
@@ -31,10 +31,12 @@ resource "render_project" "gymrats_image_server_project" {
 }
 
 resource "render_web_service" "gymrats_image_server_service" {
-  name          = "${local.project_name}"
-  plan          = "starter"
-  region        = "frankfurt"
-  start_command = "gunicorn app:app"
+  name           = local.project_name
+  depends_on     = [render_project.gymrats_image_server_project]
+  environment_id = render_project.gymrats_image_server_project.environments[var.branch_name].id
+  plan           = "starter"
+  region         = "frankfurt"
+  start_command  = "gunicorn app:app"
 
   runtime_source = {
     native_runtime = {

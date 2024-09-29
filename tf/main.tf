@@ -3,7 +3,7 @@ terraform {
     organization = "gymrats"
     hostname     = "app.terraform.io"
     workspaces {
-      tags    = ["flask"]
+      name    = "staging"
       project = "gymrats-image-server"
     }
   }

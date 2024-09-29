@@ -30,10 +30,7 @@ jobs:
       uses: hashicorp/setup-terraform@v3
     - name: Terraform Init
       run:  |
-        workspace_name="${{ github.head_ref || github.ref_name }}"
-        if ! terraform workspace select "$workspace_name" 2>/dev/null; then
-          terraform workspace new "$workspace_name"
-        fi
+        terraform workspace new "${{ github.head_ref || github.ref_name }}" || true
         terraform init
       working-directory: ./tf
     - name: Terraform Plan

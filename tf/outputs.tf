@@ -1,15 +1,3 @@
-# Output the project ID
-# output "project_id" {
-#   value       = render_project.gymrats_image_server_project.id
-#   description = "The ID of the Render project"
-# }
-
-# Output the project name
-# output "project_name" {
-#   value       = render_project.gymrats_image_server_project.name
-#   description = "The name of the Render project"
-# }
-
 # Output the service ID
 output "service_id" {
   value       = render_web_service.gymrats_image_server_service.id

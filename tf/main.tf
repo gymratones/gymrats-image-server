@@ -1,12 +1,4 @@
 terraform {
-  # cloud {
-  #   organization = "gymrats"
-  #   hostname     = "app.terraform.io"
-  #   workspaces {
-  #     name    = "staging"
-  #     project = "gymrats-image-server"
-  #   }
-  # }
   backend "remote" {
     organization = "gymrats"
     hostname     = "app.terraform.io"
@@ -28,20 +20,8 @@ provider "render" {
   owner_id = var.provider_account_id
 }
 
-# resource "render_project" "gymrats_image_server_project" {
-#   name = "${local.project_name}-project"
-#   environments = {
-#     "${var.branch_name}" : {
-#       name : var.branch_name,
-#       protected_status : "protected"
-#     }
-#   }
-# }
-
 resource "render_web_service" "gymrats_image_server_service" {
   name           = local.project_name
-  # depends_on     = [render_project.gymrats_image_server_project]
-  # environment_id = render_project.gymrats_image_server_project.environments[var.branch_name].id
   plan           = "starter"
   region         = "frankfurt"
   start_command  = "gunicorn app:app"

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - tf-b2 # TO BE DELETED
 
 jobs:
   init:
@@ -41,7 +42,6 @@ jobs:
         github_repository = "${{ github.repository }}"
         branch_name = "${{ github.head_ref || github.ref_name }}"
         storage_mode = "B2_STORAGE"
-        b2_bucket_name = "${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}"
         b2_key_id = "${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}"
         b2_application_key = "${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
         EOF

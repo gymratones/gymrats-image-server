@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - tf-b2 # TO BE DELETED
 
 jobs:
   init:
@@ -27,11 +28,14 @@ jobs:
         }
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
-    - name: Terraform Init
-      run: terraform init
+    - name: Terraform Create terraform.tfstate
+      run: (terraform init & pid=$!; sleep 1; kill -SIGINT $pid) > /dev/null 2>&1
       working-directory: ./tf
     - name: Select (or Create) Terraform Workspace
       run: terraform workspace select -or-create=true ${{ github.head_ref || github.ref_name }}
+      working-directory: ./tf
+    - name: Terraform Init
+      run: terraform init
       working-directory: ./tf
     - name: Create variables.auto.tfvars
       run:  |
@@ -41,7 +45,6 @@ jobs:
         github_repository = "${{ github.repository }}"
         branch_name = "${{ github.head_ref || github.ref_name }}"
         storage_mode = "B2_STORAGE"
-        b2_bucket_name = "${{ secrets.GYMRATS_STAGING_IMG_B2_BUCKET_NAME }}"
         b2_key_id = "${{ secrets.GYMRATS_STAGING_IMG_B2_KEY_ID }}"
         b2_application_key = "${{ secrets.GYMRATS_STAGING_IMG_B2_APPLICATION_KEY }}"
         EOF

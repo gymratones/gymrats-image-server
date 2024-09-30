@@ -27,7 +27,7 @@ jobs:
         }
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
-    - name: Terraform create terraform.tfstate
+    - name: Terraform Create terraform.tfstate
       run: terraform init
       continue-on-error: true
       working-directory: ./tf

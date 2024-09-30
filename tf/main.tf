@@ -3,7 +3,7 @@ terraform {
     organization = "gymrats"
     hostname     = "app.terraform.io"
     workspaces {
-      prefix = "gr-"
+      prefix = "img-"
     }
   }
 

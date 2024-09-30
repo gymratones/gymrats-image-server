@@ -2,7 +2,9 @@ __pycache__
 .env
 uploads
 
+# Terraform
 tf/.terraform/
 tf/*.terraform.*
 tf/*.tfstate
 tf/*.tfstate.*
+tf/variables.auto.tfvars
